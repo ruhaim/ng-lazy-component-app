@@ -20,9 +20,11 @@
     ],
     "paths": {
       "ng-ruh-lazy-component": [
+        "projects/ng-ruh-lazy-component/src",
         "dist/ng-ruh-lazy-component"
       ],
       "ng-ruh-lazy-component/*": [
+        "projects/ng-ruh-lazy-component/src/*",
         "dist/ng-ruh-lazy-component/*"
       ]
     }
