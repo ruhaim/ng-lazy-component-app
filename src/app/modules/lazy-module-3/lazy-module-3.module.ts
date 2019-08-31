@@ -5,8 +5,14 @@ import { Mod3Comp2Component } from './mod3-comp2/mod3-comp2.component';
 
 @NgModule({
   declarations: [Mod3Comp1Component, Mod3Comp2Component],
+  entryComponents: [Mod3Comp1Component, Mod3Comp2Component],
   imports: [
     CommonModule
   ]
 })
-export class LazyModule3Module { }
+export class LazyModule3Module {
+  static componentMap = {
+    "Mod3Comp1Component" : Mod3Comp1Component,
+    "Mod3Comp2Component" : Mod3Comp2Component
+  }
+ }

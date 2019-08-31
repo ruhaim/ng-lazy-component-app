@@ -15,4 +15,13 @@ export class AppComponent {
     },
     
   ]
+
+  addComp(compRef, moduleID, compID){
+    const m = moduleID;
+    const c = compID
+    compRef.componentPath = 
+      `src/app/modules/lazy-module-${m}/lazy-module-${m}`
+      +`.module#LazyModule${m}Module#Mod${m}Comp${c}Component`
+
+  }
 }

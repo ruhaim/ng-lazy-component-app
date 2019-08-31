@@ -1,9 +1,12 @@
-<ng-container   *ngFor="let compIndexArr of moduleMatrix">
-  {{compIndexArr|json}}
-  <ng-container   *ngFor="let index of compIndexArr">
+<ng-container   *ngFor="let compIndexArr of moduleMatrix; let moduleIndex = index">
+  <h3>Lazy Load from Module {{moduleIndex+1}} </h3>
+  <ng-container   *ngFor="let compIndex of compIndexArr">
     <div>
-        {{index}}
-        <button (click)="addComp('mod1','mod1comp1')"> Load Mod {{index}}</button>
+        <button (click)="addComp(lazyItem, moduleIndex+1,compIndex)"> 
+          Load Module-{{compIndex}} Component-{{compIndex}}
+        </button>
+        <ng-ruh-lazy-component #lazyItem>
+        </ng-ruh-lazy-component>
     </div>
 
   
@@ -14,4 +17,11 @@
 
 </ng-container >
 
-{{moduleMatrix|json}}
+<h3>Below is a lazy loaded component </h3>
+<ng-ruh-lazy-component 
+    componentPath="src/app/modules/lazy-module-1/lazy-module-1.module#LazyModule1Module#Mod1Comp1Component">
+    <div error>There was a problem loading the component</div>
+    <div loading>Loading Component, Please stand by</div>
+</ng-ruh-lazy-component>
+
+
