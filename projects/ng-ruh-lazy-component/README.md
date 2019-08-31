@@ -1,24 +1,71 @@
 # NgRuhLazyComponent
+A simple utility to lazy load components into angular without routing dependency.
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.0.
+## Benifits
+- Reduce your inital app load time by loading only the essential components first
+- Reduce the initial payload size
+- Leverage lazy loading features WITHOUT routing dependency (Not all apps are route based )
+- Ideal for apps that need to build dynamic UIs defined via JSON configs or based on user driven highly customizable UIs  
+- Prevents unnessasary memory hogging by loading only what is required 
 
-## Code scaffolding
+## Usage
 
-Run `ng generate component component-name --project ng-ruh-lazy-component` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ng-ruh-lazy-component`.
-> Note: Don't forget to add `--project ng-ruh-lazy-component` or else it will be added to the default project in your `angular.json` file. 
+```javascript
+<ng-ruh-lazy-component 
+    componentPath="src/app/modules/lazy-module-1/lazy-module-1.module#LazyModule1Module#Comp1Component"
+    [data] = "dataToPushToLoadedComponent">
+    <div error>There was a problem loading the component</div>
+    <div loading>Loading Component, Please stand by</div>
+</ng-ruh-lazy-component>
 
-## Build
+```
+`componentPath` : should take the format of `<Path to .module file>#<Name of the module>#<Component Key>`
+`data` : data To Push To Loaded Component
+`error` directive (Optional) : Allows you to specify html to show when an error is encountered 
+`loading` directive (Optional) : Allows you to specify html to show when the module is loading 
 
-Run `ng build ng-ruh-lazy-component` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Publishing
+## Prerequisites
 
-After building your library with `ng build ng-ruh-lazy-component`, go to the dist folder `cd dist/ng-ruh-lazy-component` and run `npm publish`.
+The smallest unit of Angular code that could be lazy loaded is an Angular Module (NGModule) and NOT a Component, 
+Hence ALWAYS make sure you create a module that encapsulates one or more of the Components you need to reload.
 
-## Running unit tests
+- Create your module, use `ng g m modules/lazy-module1`
+- Create 1 or more components under the module, use `ng g c modules/lazy-module1/comp1`, `ng g c modules/lazy-module1/comp2`
+- on the `modules/lazy-module1/lazy-module1.module`
 
-Run `ng test ng-ruh-lazy-component` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```javascript
+@NgModule({
+  declarations: [Comp1Component, Comp2Component],
+  entryComponents: [Comp1Component, Comp2Component], // <-- Add this line
+  imports: [
+    CommonModule
+  ]
+})
+export class LazyModule1Module { 
+  static componentMap = {                 // <-- Add static property componentMap 
+    "Comp1Component" : Comp1Component,    //    to map the string component key with 
+    "Comp2Component" : Comp2Component     //     the actual component ref
+    }                                     // you can also add a function named getComponentEntry(compType:string) 
+}                                               
+```
+- On your `angular.json` on the project root, add the module path the the `lazyModules` array in the `project.<your-app-name>.architect.build.options.lazyModules`
+```javascript
+ project:{
+     <your-app-name>:{
+         architect:{
+             build:{
+                 options:{
+                     lazyModules:[
+                         ...
+                         '<path to .module file(s)>',
+                         'src/app/modules/lazy-module1/lazy-module1.module',
+                         ...
+                     ]
+                 }
+             }
+         }
+     }
+ }
+```
+- Follow above steps for each module that need to be lazy loaded
