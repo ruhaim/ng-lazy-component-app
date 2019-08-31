@@ -1,0 +1,30 @@
+{
+  "name": "ng-ruh-lazy-component",
+  "version": "1.0.0",
+  "description":"A simple utility to lazy load components into angular without routing dependency.",
+  "author": "Ruhaim Izmeth (ruh.aim+npm@gmail.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ruhaim/ng-lazy-component-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ruhaim/ng-lazy-component-app/issues"
+  },
+  "homepage": "https://github.com/ruhaim/ng-lazy-component-app",
+  "keywords": [
+    "angular",
+    "javascript",
+    "typescript",
+    "lazy load component",
+    "dynamic component",
+    "dynamically load components",
+    "directive",
+    "angular 5",
+    "ng"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0"
+  }
+}

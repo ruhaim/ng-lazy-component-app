@@ -130,6 +130,41 @@
           }
         }
       }
+    },
+    "ng-ruh-lazy-component": {
+      "root": "projects/ng-ruh-lazy-component",
+      "sourceRoot": "projects/ng-ruh-lazy-component/src",
+      "projectType": "library",
+      "prefix": "ng-ruh",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-ruh-lazy-component/tsconfig.lib.json",
+            "project": "projects/ng-ruh-lazy-component/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-ruh-lazy-component/src/test.ts",
+            "tsConfig": "projects/ng-ruh-lazy-component/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-ruh-lazy-component/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-ruh-lazy-component/tsconfig.lib.json",
+              "projects/ng-ruh-lazy-component/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ng-lazy-component-app"

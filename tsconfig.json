@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ng-ruh-lazy-component": [
+        "dist/ng-ruh-lazy-component"
+      ],
+      "ng-ruh-lazy-component/*": [
+        "dist/ng-ruh-lazy-component/*"
+      ]
+    }
   }
 }
