@@ -1,6 +1,6 @@
 {
   "name": "ng-ruh-lazy-component",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description":"A simple utility to lazy load components into angular without routing dependency.",
   "author": "Ruhaim Izmeth (ruh.aim+npm@gmail.com)",
   "repository": {

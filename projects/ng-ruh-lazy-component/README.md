@@ -1,7 +1,12 @@
 # NgRuhLazyComponent
-A simple utility to lazy load components into angular without routing dependency.
+A simple utility to dynamically lazy load components into an angular app without routing dependency.
+- Much inspiration drawn from https://netbasal.com/the-need-for-speed-lazy-load-non-routable-modules-in-angular-30c8f1c33093
+and https://medium.com/@esanjiv/complete-beginner-guide-to-publish-an-angular-library-to-npm-d42343801660
 
-## Benifits
+## Demo Screen
+![Demo](https://i.imgur.com/J6LPD6G.gif)
+
+## Benefits
 - Reduce your inital app load time by loading only the essential components first
 - Reduce the initial payload size
 - Leverage lazy loading features WITHOUT routing dependency (Not all apps are route based )
@@ -9,6 +14,27 @@ A simple utility to lazy load components into angular without routing dependency
 - Prevents unnessasary memory hogging by loading only what is required 
 
 ## Usage
+On `app.module` file import the module
+
+```javascript
+import { NgRuhLazyComponentModule } from 'ng-ruh-lazy-component'; //<-- Add this line
+
+@NgModule({
+  declarations: [
+    AppComponent,
+  ],
+  imports: [
+    BrowserModule,
+    NgRuhLazyComponentModule  //<-- Add this line
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+
+- On anywhere in your component templates add the following
 
 ```javascript
 <ng-ruh-lazy-component 
@@ -19,10 +45,10 @@ A simple utility to lazy load components into angular without routing dependency
 </ng-ruh-lazy-component>
 
 ```
-`componentPath` : should take the format of `<Path to .module file>#<Name of the module>#<Component Key>`
-`data` : data To Push To Loaded Component
-`error` directive (Optional) : Allows you to specify html to show when an error is encountered 
-`loading` directive (Optional) : Allows you to specify html to show when the module is loading 
+- `componentPath` : should take the format of `<Path to .module file>#<Name of the module>#<Component Key>`
+- `data` : data To Push To Loaded Component
+- `error` directive (Optional) : Allows you to specify html to show when an error is encountered 
+- `loading` directive (Optional) : Allows you to specify html to show when the module is loading 
 
 
 ## Prerequisites
